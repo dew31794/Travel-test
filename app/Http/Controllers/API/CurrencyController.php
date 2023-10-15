@@ -66,6 +66,15 @@ class CurrencyController extends ApiController
                 ], 422);
             };
 
+            // ※ 幣別符號驗證
+            // if($errors = $this->service->ruleSymbol($request->source, $request->amount)){
+            //     return response()->json([
+            //         'Status' => 'Failure',
+            //         'ErrorMessage' => $errors,
+            //         'Code' => 422
+            //     ], 422);
+            // };
+
             $amount = $this->service->exchange(
                 $request->source, 
                 $request->target, 

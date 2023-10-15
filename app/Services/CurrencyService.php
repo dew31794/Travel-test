@@ -81,6 +81,17 @@ class CurrencyService extends Service
         return $this;
     }
 
+    /** 
+     * 將Amount進行格式化
+     * ※ 幣別符號驗證
+     * 
+    **/
+    // public function filterAmount($source, $amount)
+    // {
+    //     $this->amount = str_replace(',', '', str_replace(config('money.currencies')[$source]['symbol'], '', $amount));
+
+    //     return $this;
+    // }
 
     /** 
      * 將Amount進行格式化 且判斷是否為數字、不得為負數
@@ -98,6 +109,25 @@ class CurrencyService extends Service
             return "總金額只能為 $123,456 的格式。";
         }
     }
+
+    /** 
+     * 將Amount進行格式化 且判斷是否為數字、不得為負數
+     * 增加判斷幣別符號是否正確
+     * ※ 幣別符號驗證
+    **/
+    // public function ruleSymbol($source, $amount)
+    // {
+    //     $current_amount = str_replace(',', '', str_replace(config('money.currencies')[$source]['symbol'], '', $amount));
+
+    //     if(is_numeric($current_amount)){
+    //         if($current_amount < 0){
+    //             return "總金額只能輸入大於0";
+    //         }
+    //     }else{
+    //         return "格式不正確或幣別符號錯誤，請重新輸入。";
+    //     }
+    // }
+
     /** 
      * 轉換匯率
      * 
@@ -119,6 +149,14 @@ class CurrencyService extends Service
     }
 
     /**
+     * ※ 幣別符號驗證
+     * 
+     */
+    // public function output($target, $amount) {
+    //     return config('money.currencies')[$target]['symbol'].number_format($amount, strlen(substr(strrchr($amount, "."),1)));
+    // }
+
+    /**
      * 回傳結果
      * 
      */
@@ -127,9 +165,13 @@ class CurrencyService extends Service
         $this->setSource($source);
         $this->setTarget($target);
         $this->filterAmount($amount);
+        // ※ 幣別符號驗證
+        // $this->filterAmount($source,$amount);
 
         $exchangAmount = $this->exchangeCurrency();
 
         return $this->output($exchangAmount);
+        // ※ 幣別符號驗證
+        // return $this->output($target, $exchangAmount);
     }
 }
