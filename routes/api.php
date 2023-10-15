@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     // 匯率
     Route::group(['namespace' => 'API', 'prefix' => 'currency'], function () {
+        // 取得匯率列表
+        Route::get('/', 'CurrencyController@index')->name('api.currency.index');;
         // 轉換
-        Route::get('exchange', 'CurrencyController@index')->name('api.currency.exchange');
+        Route::get('exchange', 'CurrencyController@exchange')->name('api.currency.exchange');
     });
 });

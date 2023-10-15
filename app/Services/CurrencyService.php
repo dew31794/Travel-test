@@ -81,6 +81,23 @@ class CurrencyService extends Service
         return $this;
     }
 
+
+    /** 
+     * 將Amount進行格式化 且判斷是否為數字、不得為負數
+     * 
+    **/
+    public function ruleAmount($amount)
+    {
+        $current_amount = str_replace(',', '', str_replace('$', '', $amount));
+
+        if(is_numeric($current_amount)){
+            if($current_amount < 0){
+                return "總金額只能輸入大於0";
+            }
+        }else{
+            return "總金額只能為 $123,456 的格式。";
+        }
+    }
     /** 
      * 轉換匯率
      * 
