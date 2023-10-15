@@ -23,3 +23,5 @@ Please use "POSTMAN" software for API testing.
 ```
 http://127.0.0.1:8000/api/v1/currency/exchange?source=USD&target=JPY&amount=$1,525
 ```
+
+![image](https://github.com/dew31794/Travel-test/blob/main/resources/images/result.jpg)
